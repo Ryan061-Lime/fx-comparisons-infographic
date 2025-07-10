@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Business FX Pricing: An Infographic Comparison</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .chart-container {
+            position: relative;
+            margin: auto;
+            height: 40vh;
+            width: 100%;
+            max-width: 600px;
+            max-height: 400px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: auto;
+                max-height: 450px;
+            }
+        }
+        .flowchart-box {
+            border: 2px solid;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            text-align: center;
+            min-height: 8rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+        }
+        .flowchart-box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        .arrow {
+            font-size: 2rem;
+            line-height: 1;
+            color: #58508d;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+
+    <div class="container mx-auto px-4 py-8 md:py-12 max-w-7xl">
+
+        <header class="text-center mb-12 md:mb-16">
+            <h1 class="text-4xl md:text-6xl font-black text-[#003f5c] mb-4">Demystifying Business FX Costs</h1>
+            <p class="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto">A visual guide comparing the FX pricing models of traditional banks and modern fintech providers for spot and forward trades.</p>
+        </header>
+
+        <main class="space-y-12 md:space-y-20">
+
+            <section id="spot-trades" class="bg-white rounded-lg shadow-lg p-6 md:p-8 overflow-hidden">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                    <div class="md:order-2">
+                        <h2 class="text-3xl font-bold text-[#003f5c] mb-4">The Real Cost of Spot Trades</h2>
+                        <p class="text-gray-700 mb-4">An FX Spot Trade is an immediate currency exchange. While seemingly straightforward, the costs can vary dramatically. Traditional banks often apply wide, tiered spreads, especially for smaller volumes, while fintechs may offer tighter rates but with specific fees and conditions.</p>
+                        <p class="text-gray-700 font-semibold">The chart opposite compares the estimated percentage cost for a business to exchange €10,000.</p>
+                    </div>
+                    <div class="md:order-1">
+                        <div class="chart-container">
+                            <canvas id="spotTradeChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="forward-contracts" class="bg-white rounded-lg shadow-lg p-6 md:p-8 overflow-hidden">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                    <div>
+                        <h2 class="text-3xl font-bold text-[#003f5c] mb-4">Hedging with Forward Contracts</h2>
+                        <p class="text-gray-700 mb-4">Forward Contracts lock in an exchange rate for a future date, protecting your business from currency fluctuations. The cost is typically embedded in the forward rate or charged as an explicit fee. Transparency on these costs is key.</p>
+                        <p class="text-gray-700 font-semibold">This chart visualizes the known fees or maximum margins for forward contracts.</p>
+                    </div>
+                    <div>
+                        <div class="chart-container">
+                            <canvas id="forwardContractChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="revolut-advantage" class="bg-white rounded-lg shadow-lg p-6 md:p-8 overflow-hidden">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                    <div class="md:order-2">
+                        <h2 class="text-3xl font-bold text-[#003f5c] mb-4">The Revolut Advantage: Cost-Effectiveness, Transparency & Comprehensive Support</h2>
+                        <p class="text-gray-700 mb-4">Based on the explicit pricing data available, Revolut Business frequently emerges as a highly cost-effective option for FX transactions, particularly for small to medium-sized businesses.</p>
+                        <p class="text-gray-700 font-semibold">As seen in the charts, Revolut's stated fees for both spot trades (0.6% over allowance) and forward contracts (0.8%) are notably lower than the estimated costs or maximum margins provided by traditional banks. Their digital-first platform offers convenience and transparent, upfront pricing, which is a significant advantage over the often opaque, negotiation-based models of incumbent banks.</p>
+                        <p class="text-gray-700">Furthermore, for larger enterprises, Revolut also offers **custom plans** that can include tailored pricing and dedicated support, allowing them to compete with traditional banks for high-volume clients, as evidenced by their work with companies like Aer Lingus. This means Revolut's offerings can scale to meet diverse business needs, from startups to enterprises. Crucially, Revolut provides the flexibility to **sign up independently or consult with an expert/consultant** to guide you through their services and optimize your FX strategy.</p>
+                        <p class="text-gray-700">However, it's crucial to consider their fair usage allowances (where exchanges are at interbank rates) and the 1% weekend surcharge, which can impact overall cost if transactions occur outside market hours or exceed allowances without a higher-tier or custom plan.</p>
+                    </div>
+                    <div class="md:order-1">
+                        <div class="chart-container">
+                            <canvas id="revolutAdvantageChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="models" class="text-center">
+                <h2 class="text-3xl md:text-4xl font-bold text-[#003f5c] mb-4">The Two Worlds of FX Pricing</h2>
+                <p class="text-lg text-gray-600 max-w-3xl mx-auto mb-10">The approach to pricing and customer interaction differs vastly between incumbent banks and challenger fintechs. Understanding this is crucial to finding the right partner for your business needs.</p>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
+                    <div class="bg-white rounded-lg shadow-lg p-6 md:p-8">
+                        <h3 class="text-2xl font-bold text-[#bc5090] mb-6">The Traditional Bank Model</h3>
+                        <div class="space-y-4">
+                            <div class="flowchart-box border-[#bc5090] text-[#bc5090]">Initial contact with a relationship manager</div>
+                            <div class="arrow">&#11107;</div>
+                            <div class="flowchart-box border-[#bc5090] text-[#bc5090]">Request a bespoke quote for transaction</div>
+                            <div class="arrow">&#11107;</div>
+                            <div class="flowchart-box border-[#bc5090] text-[#bc5090]">Negotiate rates based on volume and relationship</div>
+                            <div class="arrow">&#11107;</div>
+                            <div class="flowchart-box border-[#bc5090] text-[#bc5090]">Execute trade with costs embedded in opaque spread</div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-lg shadow-lg p-6 md:p-8">
+                        <h3 class="text-2xl font-bold text-[#ff6361] mb-6">The Fintech Model</h3>
+                         <div class="space-y-4">
+                            <div class="flowchart-box border-[#ff6361] text-[#ff6361]">Sign up online OR consult with an expert</div>
+                            <div class="arrow">&#11107;</div>
+                            <div class="flowchart-box border-[#ff6361] text-[#ff6361]">Utilize free allowance at interbank rate</div>
+                            <div class="arrow">&#11107;</div>
+                            <div class="flowchart-box border-[#ff6361] text-[#ff6361]">Exceed allowance and pay a transparent, fixed fee</div>
+                            <div class="arrow">&#11107;</div>
+                            <div class="flowchart-box border-[#ff6361] text-[#ff6361]">Execute trade instantly 24/7 (with potential weekend surcharges)</div>
+                            <div class="arrow">&#11107;</div>
+                            <div class="flowchart-box border-[#ff6361] text-[#ff6361]">Access ongoing support for FX and other services</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <section id="recommendations" class="bg-white rounded-lg shadow-lg p-6 md:p-8">
+                <h2 class="text-3xl font-bold text-center text-[#003f5c] mb-8">Key Takeaways for Your Business</h2>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div class="bg-gray-100 p-6 rounded-lg">
+                        <h3 class="font-bold text-xl mb-2 text-[#58508d]">💡 Prioritize Total Cost</h3>
+                        <p class="text-gray-700">Look beyond "zero fee" marketing. The real cost lies in the final exchange rate. Always compare the final amount you receive or pay across providers.</p>
+                    </div>
+                    <div class="bg-gray-100 p-6 rounded-lg">
+                        <h3 class="font-bold text-xl mb-2 text-[#58508d]">🤝 Negotiate for Volume</h3>
+                        <p class="text-gray-700">For large or frequent trades, engage directly with traditional banks or discuss custom plans with fintechs like Revolut. Significant savings are possible through negotiation.</p>
+                    </div>
+                    <div class="bg-gray-100 p-6 rounded-lg">
+                        <h3 class="font-bold text-xl mb-2 text-[#58508d]">📱 Leverage Digital Platforms & Support</h3>
+                        <p class="text-gray-700">For businesses of all sizes, fintech platforms offer efficiency and competitive rates. Revolut's blend of self-service and expert consultancy provides flexible support for your FX needs. Watch out for weekend markups.</p>
+                    </div>
+                     <div class="bg-gray-100 p-6 rounded-lg">
+                        <h3 class="font-bold text-xl mb-2 text-[#58508d]">📈 Understand Forward Contracts</h3>
+                        <p class="text-gray-700">When hedging, remember the cost is baked into the forward rate itself, not just in explicit fees. Compare the actual forward rates offered for a true cost analysis.</p>
+                    </div>
+                     <div class="bg-gray-100 p-6 rounded-lg">
+                        <h3 class="font-bold text-xl mb-2 text-[#58508d]">🧩 Match Provider to Need</h3>
+                        <p class="text-gray-700">Revolut, with its transparent pricing, scalable custom plans, and expert support, is a strong contender across all business sizes. For highly specialized or complex financial instruments, traditional banks may still offer unique solutions.</p>
+                    </div>
+                     <div class="bg-gray-100 p-6 rounded-lg">
+                        <h3 class="font-bold text-xl mb-2 text-[#58508d]">❓ Demand Transparency</h3>
+                        <p class="text-gray-700">If a provider like Convera or Ulster Bank claims "competitive pricing" without showing numbers, press for a detailed quote showing all spreads and fees before you trade.</p>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+
+        <footer class="text-center mt-12 md:mt-16 pt-8 border-t border-gray-200">
+            <p class="text-gray-500 text-sm">This infographic is based on publicly available data and reports for illustrative purposes. Pricing is subject to change and may vary based on specific client relationships and transaction details. Always consult providers directly for current, accurate quotes. Neither SVG nor Mermaid JS were used in the creation of this page.</p>
+        </footer>
+
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            
+            // Removed ChartDataLabels registration as it's no longer needed for direct display on charts.
+
+            const tooltipTitleCallback = (tooltipItems) => {
+                const item = tooltipItems[0];
+                let label = item.chart.data.labels[item.dataIndex];
+                if (Array.isArray(label)) {
+                    return label.join(' ');
+                }
+                return label;
+            };
+            
+            const wrapLabel = (label) => {
+                const maxLength = 16;
+                if (label.length <= maxLength) {
+                    return label;
+                }
+                const words = label.split(' ');
+                const lines = [];
+                let currentLine = '';
+                words.forEach(word => {
+                    if ((currentLine + ' ' + word).trim().length > maxLength) {
+                        lines.push(currentLine.trim());
+                        currentLine = word;
+                    } else {
+                        currentLine = (currentLine + ' ' + word).trim();
+                    }
+                });
+                if (currentLine) {
+                    lines.push(currentLine.trim());
+                }
+                return lines;
+            };
+
+            const EnergeticPlayfulPalette = {
+                deepBlue: '#003f5c',
+                purple: '#58508d',
+                magenta: '#bc5090',
+                coral: '#ff6361',
+                orange: '#ffa600',
+            };
+
+            const initSpotTradeChart = () => {
+                const ctx = document.getElementById('spotTradeChart').getContext('2d');
+                const rawLabels = [
+                    'Bank of Ireland (Other Currencies)',
+                    'Bank of Ireland (USD/GBP)',
+                    'AIB (Card Fee Proxy)',
+                    'Revolut (Over Allowance)'
+                ];
+                const dataValues = [7.0, 4.0, 2.75, 0.6];
+                
+                new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: rawLabels.map(wrapLabel),
+                        datasets: [{
+                            label: 'Estimated Cost (%) for €10k Spot Trade',
+                            data: dataValues,
+                            backgroundColor: [
+                                EnergeticPlayfulPalette.magenta,
+                                EnergeticPlayfulPalette.purple,
+                                EnergeticPlayfulPalette.coral,
+                                EnergeticPlayfulPalette.orange
+                            ],
+                            borderColor: '#ffffff',
+                            borderWidth: 2
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        indexAxis: 'y',
+                        scales: {
+                            x: {
+                                beginAtZero: true,
+                                title: {
+                                    display: true,
+                                    text: 'Cost (%)',
+                                    font: {
+                                        weight: 'bold'
+                                    }
+                                }
+                            },
+                            y: {
+                                ticks: {
+                                    font: {
+                                        size: 12
+                                    }
+                                }
+                            }
+                        },
+                        plugins: {
+                            legend: {
+                                display: false
+                            },
+                            title: {
+                                display: true,
+                                text: 'Spot Trade Cost Comparison (per €10,000)',
+                                font: {
+                                    size: 16,
+                                    weight: 'bold'
+                                }
+                            },
+                            tooltip: {
+                                callbacks: {
+                                    title: tooltipTitleCallback
+                                }
+                            }
+                            // Removed datalabels plugin configuration
+                        }
+                    }
+                });
+            };
+
+            const initForwardContractChart = () => {
+                const ctx = document.getElementById('forwardContractChart').getContext('2d');
+                 const rawLabels = [
+                    'AIB (Max Margin)',
+                    'Revolut (Standard Fee)'
+                ];
+                const dataValues = [1.4, 0.8];
+
+                new Chart(ctx, {
+                    type: 'doughnut',
+                    data: {
+                        labels: rawLabels.map(wrapLabel),
+                        datasets: [{
+                            label: 'Fee / Margin (%)',
+                            data: dataValues,
+                            backgroundColor: [
+                                EnergeticPlayfulPalette.coral,
+                                EnergeticPlayfulPalette.orange,
+                            ],
+                            hoverOffset: 4,
+                            borderColor: '#ffffff',
+                            borderWidth: 3
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                             legend: {
+                                position: 'bottom',
+                            },
+                            title: {
+                                display: true,
+                                text: 'Forward Contract Cost Comparison',
+                                font: {
+                                    size: 16,
+                                    weight: 'bold'
+                                }
+                            },
+                             tooltip: {
+                                callbacks: {
+                                    title: tooltipTitleCallback
+                                }
+                            }
+                            // Removed datalabels plugin configuration
+                        }
+                    }
+                });
+            };
+
+            const initRevolutAdvantageChart = () => {
+                const ctx = document.getElementById('revolutAdvantageChart').getContext('2d');
+                const data = {
+                    labels: ['Cost-Effectiveness', 'Transparency', 'Digital Convenience', 'Scalability (Custom Plans)', 'Expert Support', 'Weekend Surcharge (Caveat)'],
+                    datasets: [{
+                        data: [5, 5, 4, 4, 4, 2], // Arbitrary scores, increased transparency, added expert support
+                        backgroundColor: [
+                            EnergeticPlayfulPalette.orange,
+                            EnergeticPlayfulPalette.purple,
+                            EnergeticPlayfulPalette.deepBlue,
+                            EnergeticPlayfulPalette.coral,
+                            EnergeticPlayfulPalette.magenta,
+                            '#808080'
+                        ],
+                        borderColor: '#ffffff',
+                        borderWidth: 2
+                    }]
+                };
+
+                new Chart(ctx, {
+                    type: 'radar',
+                    data: data,
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        elements: {
+                            line: {
+                                borderWidth: 3
+                            }
+                        },
+                        scales: {
+                            r: {
+                                angleLines: {
+                                    display: false
+                                },
+                                suggestedMin: 0,
+                                suggestedMax: 5,
+                                ticks: {
+                                    display: false
+                                }
+                            }
+                        },
+                        plugins: {
+                            legend: {
+                                display: false
+                            },
+                            title: {
+                                display: true,
+                                text: 'Revolut Key Strengths & Considerations',
+                                font: {
+                                    size: 16,
+                                    weight: 'bold'
+                                }
+                            },
+                            tooltip: {
+                                callbacks: {
+                                    label: function(context) {
+                                        let label = context.dataset.label || '';
+                                        if (label) {
+                                            label += ': ';
+                                        }
+                                        if (context.parsed.r !== null) {
+                                            label += context.parsed.r;
+                                        }
+                                        return label;
+                                    },
+                                    title: tooltipTitleCallback
+                                }
+                            }
+                        }
+                    }
+                });
+            };
+            
+            initSpotTradeChart();
+            initForwardContractChart();
+            initRevolutAdvantageChart();
+        });
+    </script>
+
+</body>
+</html>
